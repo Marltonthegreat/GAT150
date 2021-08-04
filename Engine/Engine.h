@@ -13,7 +13,8 @@
 #include "Math/Transform.h"
 
 //Graphics
-
+#include "Graphics/Renderer.h"
+#include "Graphics/Texture.h"
 
 //Objects
 #include "Object/Actor.h"
