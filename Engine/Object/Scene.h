@@ -14,7 +14,7 @@ namespace glds
 	{
 	public:
 		void Update(float dt);
-		void Draw();
+		void Draw(class Renderer* renderer);
 
 		void AddActor(std::unique_ptr<Actor> actor);
 		void RemoveActor(Actor* actor);

@@ -10,11 +10,20 @@ int main(int, char**)
 
 	engine.Get<glds::Renderer>()->Create("GAT150", 800, 600);
 
-	std::cout << glds::GetFilePath() << std::endl;
+	glds::Scene scene;
+	scene.engine = &engine;
+
 	glds::SetFilePath("../Resources");
-	std::cout << glds::GetFilePath() << std::endl;
 
 	std::shared_ptr<glds::Texture> texture = engine.Get<glds::ResourceSystem>()->Get<glds::Texture>("sf2.png", engine.Get<glds::Renderer>());
+
+	for (int i = 0; i < 100; i++)
+	{
+		glds::Transform transform{ glds::Vector2{ glds::RandomRange(0, 800), glds::RandomRange(0, 600)}, glds::RandomRange(0, 360) };
+		std::unique_ptr<glds::Actor> actor = std::make_unique<glds::Actor>(transform, texture);
+		scene.AddActor(std::move(actor));
+	}
+
 
 	bool quit = false;
 	SDL_Event event;
@@ -30,20 +39,17 @@ int main(int, char**)
 			break;
 		}
 
+		engine.Update(0);
+		scene.Update(0);
+
+
 		engine.Get<glds::Renderer>()->BeginFrame();
 
 		glds::Vector2 position{ 300,400 };
-		engine.Get<glds::Renderer>()->Draw(texture, position);
+		//engine.Get<glds::Renderer>()->Draw(texture, position);
+		scene.Draw(engine.Get<glds::Renderer>());
 
 		engine.Get<glds::Renderer>()->EndFrame();
-
-		//			for (size_t i = 0; i < 2; i++)
-		//			{
-		//				SDL_Rect src{ 32, 64, 32, 64 };
-		//				SDL_Rect dest{ glds::RandomRangeInt( 0, screen.x ), glds::RandomRangeInt(0, screen.y), 64, 96};
-
-		//				SDL_RenderCopy(renderer, texture, &src, &dest);
-		//			}
 
 	}
 
