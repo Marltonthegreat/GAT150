@@ -5,6 +5,7 @@
 
 int main(int, char**)
 {
+
 	glds::Engine engine;
 	engine.Startup();
 
@@ -27,6 +28,8 @@ int main(int, char**)
 
 	bool quit = false;
 	SDL_Event event;
+	float quitTime = engine.time.time + 3;
+
 	while (!quit)
 	{
 
@@ -39,9 +42,12 @@ int main(int, char**)
 			break;
 		}
 
-		engine.Update(0);
-		scene.Update(0);
+		engine.Update();
+		scene.Update(engine.time.deltaTime);
 
+		//std::cout << engine.time.time << std::endl;
+		if (engine.time.time >= quitTime) quit = true;
+		engine.time.timeScale = .25;
 
 		engine.Get<glds::Renderer>()->BeginFrame();
 
