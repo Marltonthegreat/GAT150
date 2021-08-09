@@ -1,5 +1,6 @@
 #pragma once
 
+
 namespace glds
 {
 	void SeedRandom(unsigned int seed);
@@ -9,5 +10,6 @@ namespace glds
 
 
 	int RandomInt();
+	int RandomInt(int max);
 	int RandomRangeInt(int min, int max);
 }
