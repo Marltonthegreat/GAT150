@@ -1,5 +1,4 @@
 #include "Engine.h"
-#include "Input/InputSystem.h"
 #include <SDL.h>
 #include <SDL_image.h>
 #include <iostream>
@@ -16,12 +15,19 @@ int main(int, char**)
 
 	glds::SetFilePath("../Resources");
 
-	std::shared_ptr<glds::Texture> texture = engine.Get<glds::ResourceSystem>()->Get<glds::Texture>("sf2.png", engine.Get<glds::Renderer>());
+	engine.Get<glds::AudioSystem>()->AddAudio("explosion", "audio/explosion.wav");
+	engine.Get<glds::AudioSystem>()->AddAudio("playerFire", "audio/playerFire.wav");
+	engine.Get<glds::AudioSystem>()->AddAudio("enemyFire", "audio/enemyFire.wav");
+	engine.Get<glds::AudioSystem>()->AddAudio("music", "audio/Sunday Morning.mp3");
+
+	glds::AudioChannel channel = engine.Get<glds::AudioSystem>()->PlayAudio("music", 1, 1, true);
+
+	std::shared_ptr<glds::Texture> actorTexture = engine.Get<glds::ResourceSystem>()->Get<glds::Texture>("sf2.png", engine.Get<glds::Renderer>());
 
 	for (int i = 0; i < 10; i++)
 	{
 		glds::Transform transform{ glds::Vector2{ glds::RandomRange(0, 800), glds::RandomRange(0, 600)}, glds::RandomRange(0, 360) };
-		std::unique_ptr<glds::Actor> actor = std::make_unique<glds::Actor>(transform, texture);
+		std::unique_ptr<glds::Actor> actor = std::make_unique<glds::Actor>(transform, actorTexture);
 		scene.AddActor(std::move(actor));
 	}
 
@@ -50,7 +56,15 @@ int main(int, char**)
 		}
 		if (engine.Get<glds::InputSystem>()->GetButtonState(static_cast<int>(glds::InputSystem::eMouseButton::Left)) == glds::InputSystem::eKeyState::Held)
 		{
-			//engine.Get<glds::ParticleSystem>()->Create()	std::shared_ptr<glds::Texture> texture = engine.Get<glds::ResourceSystem>()->Get<glds::Texture>("sf2.png", engine.Get<glds::Renderer>());
+			channel.SetPitch(channel.GetPitch() + .1f);
+
+			std::shared_ptr<glds::Texture> particleTexture = engine.Get<glds::ResourceSystem>()->Get<glds::Texture>("particle01.png", engine.Get<glds::Renderer>());
+			engine.Get<glds::ParticleSystem>()->Create(engine.Get<glds::InputSystem>()->GetMousePos(), 100, particleTexture, .5f, 600);
+			engine.Get<glds::AudioSystem>()->PlayAudio("explosion");
+		}
+		if (engine.Get<glds::InputSystem>()->GetButtonState(static_cast<int>(glds::InputSystem::eMouseButton::Right)) == glds::InputSystem::eKeyState::Pressed)
+		{
+			channel.SetPitch(1);
 		}
 
 		engine.Get<glds::Renderer>()->BeginFrame();

@@ -39,13 +39,13 @@ namespace glds
 		}
 	}
 
-	void ParticleSystem::Draw(Renderer* graphics)
+	void ParticleSystem::Draw(Renderer* renderer)
 	{
 		for (const Particle& particle : particles)
 		{
 			if (particle.isActive)
 			{
-
+				renderer->Draw(particle.texture, particle.position);
 			}
 		}
 	}
