@@ -3,6 +3,7 @@
 #include <SDL_image.h>
 #include <iostream>
 
+
 int main(int, char**)
 {
 	glds::Engine engine;
@@ -36,6 +37,18 @@ int main(int, char**)
 	SDL_Event event;
 	float quitTime = engine.time.time + 3;
 
+	// get font from resource system
+	int size = 16;
+	std::shared_ptr<glds::Font> font = engine.Get<glds::ResourceSystem>()->Get<glds::Font>("fonts/jokerman.ttf", &size);
+
+	// create font texture
+	std::shared_ptr<glds::Texture> textTexture = std::make_shared<glds::Texture>(engine.Get<glds::Renderer>());
+	// set font texture with font surface
+	textTexture->Create(font->CreateSurface("hello world", glds::Color{ 1, 1, 1 }));
+	// add font texture to resource system
+	engine.Get<glds::ResourceSystem>()->Add("textTexture", textTexture);
+
+
 	while (!quit)
 	{
 
@@ -68,6 +81,11 @@ int main(int, char**)
 		}
 
 		engine.Get<glds::Renderer>()->BeginFrame();
+
+		glds::Transform t;
+		t.position = { 30, 30 };
+		t.scale = 8;
+		engine.Get<glds::Renderer>()->Draw(textTexture, t);
 
 		engine.Draw(engine.Get<glds::Renderer>());
 		scene.Draw(engine.Get<glds::Renderer>());

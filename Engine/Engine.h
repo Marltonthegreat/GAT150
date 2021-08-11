@@ -3,6 +3,7 @@
 #include "Audio/AudioSystem.h"
 
 //Core
+#include "Core/Utilities.h"
 #include "Core/FileSystem.h"
 #include "Core/Timer.h"
 
@@ -16,6 +17,7 @@
 //Graphics
 #include "Graphics/Renderer.h"
 #include "Graphics/Texture.h"
+#include "Graphics/Font.h"
 #include "Graphics/ParticleSystem.h"
 
 //Input

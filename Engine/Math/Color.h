@@ -1,5 +1,6 @@
 #pragma once
 #include <fstream>
+#include <SDL.h>
 
 namespace glds
 {
@@ -21,6 +22,17 @@ namespace glds
 		Color operator * (const float s) const { return { r * s, g * s, b * s }; }
 		operator std::uint32_t() const { return toRGB(); }
 		operator bool() const { return false; }
+
+		operator SDL_Color() const
+		{
+			SDL_Color color;
+			color.r = static_cast<Uint8>(r * 255);
+			color.g = static_cast<Uint8>(g * 255);
+			color.b = static_cast<Uint8>(b * 255);
+			color.a = 255;
+
+			return color;
+		}
 		
 		std::uint32_t toRGB() const
 		{

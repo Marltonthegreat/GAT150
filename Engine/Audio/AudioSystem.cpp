@@ -1,4 +1,5 @@
 #include "AudioSystem.h"
+#include "Core/Utilities.h"
 
 glds::AudioSystem audioSystem;
 
@@ -31,17 +32,17 @@ namespace glds
 
 	void AudioSystem::AddAudio(const std::string& name, const std::string& filename)
 	{
-		if (sounds.find(name) == sounds.end())
+		if (sounds.find(string_toLower(name)) == sounds.end())
 		{
 			FMOD::Sound* sound{ nullptr };
 			fmodSystem->createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
-			sounds[name] = sound;
+			sounds[string_toLower(name)] = sound;
 		}
 	}
 
 	AudioChannel AudioSystem::PlayAudio(const std::string& name, float volume, float pitch, bool loop)
 	{
-		auto iter = sounds.find(name);
+		auto iter = sounds.find(string_toLower(name));
 		if (iter != sounds.end())
 		{
 			FMOD::Sound* sound = iter->second;
