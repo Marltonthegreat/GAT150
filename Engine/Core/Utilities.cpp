@@ -1,4 +1,5 @@
 #include "Utilities.h"
+#include "Engine.h"
 #include <algorithm>
 
 namespace glds
@@ -21,5 +22,9 @@ namespace glds
 		{
 			return (std::tolower(c1) == std::tolower(c2));
 		});
+	}
+	bool IsButtonPressed(int id, Engine* engine)
+	{
+		return engine->Get<glds::InputSystem>()->GetKeyState(id) == glds::InputSystem::eKeyState::Pressed;
 	}
 }
