@@ -23,8 +23,19 @@ namespace glds
 			return (std::tolower(c1) == std::tolower(c2));
 		});
 	}
+
 	bool IsButtonPressed(int id, Engine* engine)
 	{
 		return engine->Get<glds::InputSystem>()->GetKeyState(id) == glds::InputSystem::eKeyState::Pressed;
+	}
+
+	bool IsButtonHeld(int id, Engine* engine)
+	{
+		return engine->Get<glds::InputSystem>()->GetKeyState(id) == glds::InputSystem::eKeyState::Held;
+	}
+
+	bool IsButtonPressHold(int id, Engine* engine)
+	{
+		return IsButtonPressed(id, engine) || IsButtonHeld(id, engine);
 	}
 }

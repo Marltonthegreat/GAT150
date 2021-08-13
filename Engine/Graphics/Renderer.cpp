@@ -54,10 +54,15 @@ namespace glds
 	{
 		Vector2 size = texture->GetSize();
 		size = size * scale;
+		Vector2 newPos = pos - (size * .5f);
 
-		SDL_Rect dest{ (int)pos.x, (int)pos.y, static_cast<int>(size.x), static_cast<int>(size.y)};
+		SDL_Rect dest;
+		dest.x = static_cast<int>(newPos.x);
+		dest.y = static_cast<int>(newPos.y);
+		dest.w = static_cast<int>(size.x);
+		dest.h = static_cast<int>(size.y);
 
-		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, angle, nullptr, SDL_FLIP_NONE);
+		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, glds::RadToDeg(angle), nullptr, SDL_FLIP_NONE);
 	}
 
 	void Renderer::Draw(std::shared_ptr<glds::Texture> texture, const Transform& transform)
@@ -65,8 +70,14 @@ namespace glds
 		Vector2 size = texture->GetSize();
 		size = size * transform.scale;
 
-		SDL_Rect dest{ static_cast<int>(transform.position.x), static_cast<int>(transform.position.y), static_cast<int>(size.x), static_cast<int>(size.y) };
+		Vector2 newPos = transform.position - (size * .5f);
 
-		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, transform.rotation, nullptr, SDL_FLIP_NONE);
+		SDL_Rect dest;
+		dest.x = static_cast<int>(newPos.x);
+		dest.y = static_cast<int>(newPos.y);
+		dest.w = static_cast<int>(size.x);
+		dest.h = static_cast<int>(size.y);
+
+		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, glds::RadToDeg(transform.rotation), nullptr, SDL_FLIP_NONE);
 	}
 }

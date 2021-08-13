@@ -1,6 +1,8 @@
 #include "Game.h"
+#include "Actors/Player.h"
 #include "Core/Utilities.h"	
 #include <fstream>
+#include <string>
 
 void Game::Initialize()
 {
@@ -29,15 +31,6 @@ void Game::Initialize()
 
 
 	musicChannel = engine->Get<glds::AudioSystem>()->PlayAudio("music", 1, 1, true);
-
-	std::shared_ptr<glds::Texture> actorTexture = engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("sf2.png", engine->Get<glds::Renderer>());
-
-	for (int i = 0; i < 10; i++)
-	{
-		glds::Transform transform{ glds::Vector2{ glds::RandomRange(0, 800), glds::RandomRange(0, 600)}, glds::RandomRange(0, 360) };
-		std::unique_ptr<glds::Actor> actor = std::make_unique<glds::Actor>(transform, actorTexture);
-		scene->AddActor(std::move(actor));
-	}
 
 	if (!LoadScore())
 	{
@@ -92,6 +85,7 @@ bool Game::SaveScore(int score)
 
 void Game::Update()
 {
+	engine->Update();
 	float dt = engine->time.deltaTime;
 
 	stateTimer += dt;
@@ -135,13 +129,12 @@ void Game::Update()
 		break;
 	}
 
-	engine->Update();
 	scene->Update(dt);
 	if (glds::IsButtonPressed(SDL_SCANCODE_ESCAPE, engine.get()))
 	{
 		quit = true;
 	}
-	if (engine->Get<glds::InputSystem>()->GetButtonState(static_cast<int>(glds::InputSystem::eMouseButton::Left)) == glds::InputSystem::eKeyState::Held)
+	if (engine->Get<glds::InputSystem>()->GetButtonState(static_cast<int>(glds::InputSystem::eMouseButton::Left)) == glds::InputSystem::eKeyState::Pressed)
 	{
 		musicChannel.SetPitch(musicChannel.GetPitch() + .1f);
 
@@ -157,6 +150,7 @@ void Game::Update()
 
 void Game::Draw()
 {
+	engine->Get<glds::Renderer>()->BeginFrame();
 	switch (state)
 	{
 	case Game::GameState::Title:
@@ -195,10 +189,9 @@ void Game::Draw()
 	//graphics.DrawString(720, 20, ("Lives: " + std::to_string(lives)).c_str());
 
 	//draw
-	engine->Get<glds::Renderer>()->BeginFrame();
 
 	glds::Transform t;
-	t.position = { 30, 30 };
+	t.position = { 400, 300 };
 	t.scale = 8;
 	engine->Get<glds::Renderer>()->Draw(textTexture, t);
 
@@ -212,7 +205,7 @@ void Game::UpdateStartLevel(unsigned int enemyAmount)
 {
 	//std::vector<glds::Vector2> points = { {-5,-5}, {5,-5}, {0,8}, {-5,-5} };
 
-	//scene->AddActor(std::make_unique<Player>(glds::Transform{ glds::Vector2{400.0f, 300.0f}, 0, 5 }, engine->Get<glds::ResourceSystem>()->Get<glds::Shape>("player.txt"), 600.0f));
+	scene->AddActor(std::make_unique<Player>(glds::Transform{ glds::Vector2{400.0f, 300.0f}}, engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("playerShip3_blue.png", engine->Get<glds::Renderer>()), 600.0f));
 	//
 	//SpawnEnemies(enemyAmount);
 }
