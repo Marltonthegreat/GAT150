@@ -27,6 +27,6 @@ namespace glds
 	{
 		Vector2 size = texture->GetSize();
 
-		return (texture) ? texture->GetSize().Length() * 0.5f : 0;
+		return (texture) ? texture->GetSize().Length() * 0.5f * transform.scale.x : 0;
 	}
 }

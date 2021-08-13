@@ -2,6 +2,7 @@
 #include "Framework/System.h"
 #include "Texture.h"
 #include "Math/Transform.h"
+#include "Math/MathUtils.h"
 #include <SDL.h>
 #include <string>
 

@@ -29,7 +29,7 @@ namespace glds
 		void Draw(Renderer* renderer) override;
 
 		void Create(const Vector2& position, const size_t count, const std::shared_ptr<Texture> texture, const float lifetime, const float speed);
-		void Create(const Vector2& position, const size_t count, const float lifetime, const float speed, const float angle, const float angleRange);
+		void Create(const Vector2& position, const size_t count, const std::shared_ptr<Texture> texture, const float lifetime, const float speed, const float angle, const float angleRange);
 
 	private:
 		std::vector<Particle> particles;

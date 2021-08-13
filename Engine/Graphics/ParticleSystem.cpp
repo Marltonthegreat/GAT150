@@ -68,7 +68,7 @@ namespace glds
 		}
 	}
 	
-	void ParticleSystem::Create(const Vector2& position, const size_t count, const float lifetime, const float speed, const float angle, const float angleRange)
+	void ParticleSystem::Create(const Vector2& position, const size_t count, const std::shared_ptr<Texture> texture, const float lifetime, const float speed, const float angle, const float angleRange)
 	{
 		for (size_t i = 0; i < count; i++)
 		{
@@ -79,8 +79,9 @@ namespace glds
 				particle->lifetime = lifetime;
 				particle->position = position;
 				particle->prevPosition = position;
+				particle->texture = texture;
 
-				particle->velocity = (glds::Vector2::Rotate(glds::Vector2::right, angle + glds::RandomRange(-angleRange, angleRange))) * (speed * Random());
+				particle->velocity = (glds::Vector2::Rotate(glds::Vector2::right, angle + glds::RandomRange(-angleRange, angleRange))) * (speed * glds::RandomRange(0.5f, 1));
 			}
 		}
 	}
