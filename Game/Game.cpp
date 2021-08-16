@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Actors/Player.h"
+#include "Actors/Enemy.h"
 #include "Core/Utilities.h"	
 #include <fstream>
 #include <string>
@@ -16,19 +17,28 @@ void Game::Initialize()
 	scene->engine = engine.get();
 	scene->name = "GameName";
 
+	glds::SeedRandom(static_cast<unsigned int>(time(nullptr)));
 	glds::SetFilePath("../Resources");
 
 	// get font from resource system
 	int size = 16;
-	std::shared_ptr<glds::Font> font = engine->Get<glds::ResourceSystem>()->Get<glds::Font>("fonts/jokerman.ttf", &size);
+	font = engine->Get<glds::ResourceSystem>()->Get<glds::Font>("fonts/jokerman.ttf", &size);
 
-	// create font texture
-	textTexture = std::make_shared<glds::Texture>(engine->Get<glds::Renderer>());
-	// set font texture with font surface
-	textTexture->Create(font->CreateSurface("hello world", glds::Color{ 1, 1, 1 }));
-	// add font texture to resource system
-	engine->Get<glds::ResourceSystem>()->Add("textTexture", textTexture);
+	std::shared_ptr<glds::Texture> titleTexture = std::make_shared<glds::Texture>(engine->Get<glds::Renderer>());
+	titleTexture->Create(font->CreateSurface("VECTREX", glds::Color::white));
+	engine->Get<glds::ResourceSystem>()->Add("titleTexture", titleTexture);
 
+
+
+	std::shared_ptr<glds::Texture> gameoverTexture = std::make_shared<glds::Texture>(engine->Get<glds::Renderer>());
+	gameoverTexture->Create(font->CreateSurface("GAME  OVER", glds::Color::white));
+	engine->Get<glds::ResourceSystem>()->Add("gameoverTexture", gameoverTexture);
+
+
+
+	std::shared_ptr<glds::Texture> scoreTexture = std::make_shared<glds::Texture>(engine->Get<glds::Renderer>());
+	scoreTexture->Create(font->CreateSurface("Score: 0000", glds::Color::white));
+	engine->Get<glds::ResourceSystem>()->Add("scoreTexture", scoreTexture);
 
 	musicChannel = engine->Get<glds::AudioSystem>()->PlayAudio("music", 1, 1, true);
 
@@ -93,6 +103,8 @@ void Game::Update()
 	switch (state)
 	{
 	case Game::GameState::Title:
+		if (startTexture)
+		startTexture->Create(font->CreateSurface("Press Space to Start", glds::Color::yellow));
 		if (glds::IsButtonPressed(SDL_SCANCODE_SPACE, engine.get()))
 		{
 			state = GameState::StartGame;
@@ -104,9 +116,14 @@ void Game::Update()
 		state = GameState::StartLevel;
 		break;
 	case Game::GameState::StartLevel:
+		UpdateStartLevel(2);
+		state = GameState::Game;
 		break;
 	case Game::GameState::Game:
-
+		if (scene->GetActors<Enemy>().size() == 0)
+		{
+			SpawnEnemies(static_cast<int>(score * 1.25));
+		}
 		break;
 	case Game::GameState::GameOver:
 		if (score > highScore)
@@ -150,28 +167,23 @@ void Game::Update()
 
 void Game::Draw()
 {
+	glds::Transform t;
+	t.position = { 400, 300 };
+	t.scale = 2;
 	engine->Get<glds::Renderer>()->BeginFrame();
+
 	switch (state)
 	{
 	case Game::GameState::Title:
-		//graphics.SetColor(glds::Color::yellow);
-		//graphics.DrawString(350, 250 + static_cast<int>(std::sin(stateTimer * 6) * 10), "Vectrex");
-
-		//graphics.DrawString(310, 350, "Press Space to Start");
+	{
+		engine->Get<glds::Renderer>()->Draw(startTexture, t);
+	}
 		break;
 	case Game::GameState::StartGame:
 		break;
 	case Game::GameState::StartLevel:
-	{
-		UpdateStartLevel(2);
-		state = GameState::Game;
-	}
 		break;
 	case Game::GameState::Game:
-		//if (scene->GetActors<Enemy>().size() == 0)
-		//{
-		//	SpawnEnemies(static_cast<int>(score * 1.25));
-		//}
 		break;
 	case Game::GameState::GameOver:
 		//graphics.SetColor(glds::Color::red);
@@ -190,10 +202,6 @@ void Game::Draw()
 
 	//draw
 
-	glds::Transform t;
-	t.position = { 400, 300 };
-	t.scale = 8;
-	engine->Get<glds::Renderer>()->Draw(textTexture, t);
 
 	engine->Draw(engine->Get<glds::Renderer>());
 	scene->Draw(engine->Get<glds::Renderer>());
@@ -206,16 +214,16 @@ void Game::UpdateStartLevel(unsigned int enemyAmount)
 	//std::vector<glds::Vector2> points = { {-5,-5}, {5,-5}, {0,8}, {-5,-5} };
 
 	scene->AddActor(std::make_unique<Player>(glds::Transform{ glds::Vector2{400.0f, 300.0f}}, engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("playerShip3_blue.png", engine->Get<glds::Renderer>()), 600.0f));
-	//
-	//SpawnEnemies(enemyAmount);
+	
+	SpawnEnemies(enemyAmount);
 }
 
 void Game::SpawnEnemies(unsigned int amount)
 {
-	/*for (size_t i = 0; i < amount; i++)
+	for (size_t i = 0; i < amount; i++)
 	{
-		scene->AddActor(std::make_unique<Enemy>(glds::Transform{ glds::Vector2{0.0f, glds::RandomRange(0, 600)}, glds::RandomRange(0, glds::TwoPi), 5 }, engine->Get<glds::ResourceSystem>()->Get<glds::Shape>("enemy.txt"), 100));
-	}*/
+		scene->AddActor(std::make_unique<Enemy>(glds::Transform{ glds::Vector2{0.0f, glds::RandomRange(0, 600)}, glds::RandomRange(0, glds::TwoPi)}, engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("enemyBlack1.png", engine->Get<glds::Renderer>()), 100));
+	}
 }
 
 void Game::OnAddPoints(const glds::Event& event)

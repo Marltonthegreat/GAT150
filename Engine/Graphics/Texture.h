@@ -4,8 +4,6 @@
 #include <SDL.h>
 #include <iostream>
 
-// seperate Resource from ResourceSystem then include it in ResourceSystem
-
 namespace glds
 {
 	class Texture : public Resource

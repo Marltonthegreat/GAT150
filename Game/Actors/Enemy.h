@@ -3,7 +3,7 @@
 
 class Enemy : public glds::Actor
 {
-//public:
+public:
 	Enemy(const glds::Transform& transform, std::shared_ptr<glds::Texture> texture, float speed) : glds::Actor{ transform, texture }, speed{ speed } {}
 
 	void Update(float dt) override;

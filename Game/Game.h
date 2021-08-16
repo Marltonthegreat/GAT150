@@ -53,5 +53,10 @@ private:
 
 	glds::AudioChannel musicChannel;
 	std::shared_ptr<glds::Texture> particleTexture;
-	std::shared_ptr<glds::Texture> textTexture;
+	std::shared_ptr<glds::Texture> titleTexture;
+	std::shared_ptr<glds::Texture> startTexture;
+	std::shared_ptr<glds::Texture> gameOverTexture;
+	std::shared_ptr<glds::Texture> scoreTexture;
+	std::shared_ptr<glds::Texture> livesTexture;
+	std::shared_ptr<glds::Font> font;
 };

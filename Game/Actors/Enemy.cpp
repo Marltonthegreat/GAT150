@@ -47,16 +47,16 @@ void Enemy::Update(float dt)
 
 void Enemy::OnCollision(Actor* actor)
 {
-	//if (dynamic_cast<Player*>(actor) || (dynamic_cast<Projectile*>(actor) && actor->tag == "Player"))
-	//{
-	//	destroy = true;
-	//	std::vector<glds::Color> colors = { glds::Color::white, glds::Color::red, glds::Color::blue };
-	//	scene->engine->Get<glds::ParticleSystem>()->Create(transform.position, 100, 2, colors[glds::RandomRangeInt(0, colors.size())], 150);
-	//	scene->engine->Get<glds::AudioSystem>()->PlayAudio("explosion");
+	if (dynamic_cast<Player*>(actor) || (dynamic_cast<Projectile*>(actor) && actor->tag == "Player"))
+	{
+		destroy = true;
+		std::vector<glds::Color> colors = { glds::Color::white, glds::Color::red, glds::Color::blue };
+		scene->engine->Get<glds::ParticleSystem>()->Create(transform.position, 10, scene->engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("particle02.png", scene->engine->Get<glds::Renderer>()), 1, 150, transform.rotation, glds::DegToRad(360));
+		scene->engine->Get<glds::AudioSystem>()->PlayAudio("explosion");
 
-	//	glds::Event event;
-	//	event.name = "AddPoints";
-	//	event.data = 1;
-	//	scene->engine->Get<glds::EventSystem>()->Notify(event);
-	//}
+		glds::Event event;
+		event.name = "AddPoints";
+		event.data = 1;
+		scene->engine->Get<glds::EventSystem>()->Notify(event);
+	}
 }
