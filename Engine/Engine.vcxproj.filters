@@ -95,6 +95,9 @@
     <ClCompile Include="Core\Utilities.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
+    <ClCompile Include="Component\SpriteComponent.cpp">
+      <Filter>Source\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\EventSystem.h">
@@ -173,6 +176,12 @@
       <Filter>Source\Core</Filter>
     </ClInclude>
     <ClInclude Include="Component\Component.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\GraphicsComponent.h">
+      <Filter>Source\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component\SpriteComponent.h">
       <Filter>Source\Component</Filter>
     </ClInclude>
   </ItemGroup>
