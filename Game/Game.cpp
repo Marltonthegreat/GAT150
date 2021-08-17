@@ -279,4 +279,3 @@ void Game::OnPlayerDeath(const glds::Event& event)
 		scene->AddActor(std::move(player));
 	}
 }
-
