@@ -57,6 +57,7 @@ private:
 	std::shared_ptr<glds::Texture> startTexture;
 	std::shared_ptr<glds::Texture> gameOverTexture;
 	std::shared_ptr<glds::Texture> scoreTexture;
+	std::shared_ptr<glds::Texture> highScoreTexture;
 	std::shared_ptr<glds::Texture> livesTexture;
 	std::shared_ptr<glds::Font> font;
 };
