@@ -1,0 +1,17 @@
+#pragma once
+#include "Component/GraphicsComponent.h"
+
+#include <memory>
+
+namespace glds
+{
+	class SpriteComponent : public GraphicsComponent
+	{
+	public:
+		void Update() override;
+		void Draw(Renderer* renderer) override;
+	
+	public:
+		std::shared_ptr<class Texture> texture;
+	};
+}
