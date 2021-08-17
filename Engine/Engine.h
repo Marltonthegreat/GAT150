@@ -23,9 +23,13 @@
 //Input
 #include "Input/InputSystem.h"
 
-//Objects
+//Object
 #include "Object/Actor.h"
 #include "Object/Scene.h"
+
+//Component
+#include "Component/SpriteComponent.h"
+#include "Component/PhysicsComponent.h"
 
 //Framework
 #include "Framework/EventSystem.h"
