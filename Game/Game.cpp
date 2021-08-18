@@ -18,15 +18,16 @@ void Game::Initialize()
 	glds::SeedRandom(static_cast<unsigned int>(time(nullptr)));
 	glds::SetFilePath("../Resources");
 
-	std::unique_ptr<glds::Actor> actor = std::make_unique<glds::Actor>(glds::Transform{ {400,300} });
-	std::unique_ptr<glds::SpriteComponent> spriteComponent = std::make_unique<glds::SpriteComponent>();
+	std::unique_ptr<glds::Actor> actor = std::make_unique<glds::Actor>(glds::Transform{ {400,300}, 0, 9 });
+	glds::SpriteAnimationComponent* spriteAnimationComponent = actor->AddComponent<glds::SpriteAnimationComponent>();
 
-	spriteComponent->texture = engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("sf2.png", engine->Get<glds::Renderer>());
-	actor->AddComponent(std::move(spriteComponent));
+	spriteAnimationComponent->texture = engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("character.png", engine->Get<glds::Renderer>());
+	spriteAnimationComponent->fps = 30;
+	spriteAnimationComponent->numFramesX = 12;
+	spriteAnimationComponent->numFramesY = 8;
 
-	std::unique_ptr<glds::PhysicsComponent> physicsComponent = std::make_unique<glds::PhysicsComponent>();
-	physicsComponent->ApplyForce(glds::Vector2::right * 200);
-	actor->AddComponent(std::move(physicsComponent));
+	glds::PhysicsComponent* physicsComponent = actor->AddComponent<glds::PhysicsComponent>();
+	//physicsComponent->ApplyForce(glds::Vector2::right * 200);
 
 	scene->AddActor(std::move(actor));
 }

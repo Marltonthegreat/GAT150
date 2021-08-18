@@ -80,4 +80,20 @@ namespace glds
 
 		SDL_RenderCopyEx(renderer, texture->texture, nullptr, &dest, glds::RadToDeg(transform.rotation), nullptr, SDL_FLIP_NONE);
 	}
+	
+	void Renderer::Draw(std::shared_ptr<glds::Texture> texture, const SDL_Rect& source, const Transform& transform)
+	{
+		Vector2 size = Vector2{source.w, source.h};
+		size = size * transform.scale;
+
+		Vector2 newPos = transform.position - (size * .5f);
+
+		SDL_Rect dest;
+		dest.x = static_cast<int>(newPos.x);
+		dest.y = static_cast<int>(newPos.y);
+		dest.w = static_cast<int>(size.x);
+		dest.h = static_cast<int>(size.y);
+
+		SDL_RenderCopyEx(renderer, texture->texture, &source, &dest, glds::RadToDeg(transform.rotation), nullptr, SDL_FLIP_NONE);
+	}
 }
