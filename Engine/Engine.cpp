@@ -14,6 +14,7 @@ namespace glds
 
 		std::for_each(systems.begin(), systems.end(), [](auto& system) {system->Startup(); });
 
+		ObjectFactory::Instance().Register<SpriteAnimationComponent>("SpriteAnimationComponent");
 	}
 
 	void Engine::Shutdown()

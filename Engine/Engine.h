@@ -1,18 +1,23 @@
 #pragma once
-//Audio
-#include "Audio/AudioSystem.h"
-
-//Core
-#include "Core/Utilities.h"
-#include "Core/FileSystem.h"
-#include "Core/Timer.h"
-
 //Math
 #include "Math/Vector2.h"
 #include "Math/Color.h"
 #include "Math/Random.h"
 #include "Math/MathUtils.h"
 #include "Math/Transform.h"
+
+//Framework
+#include "Framework/EventSystem.h"
+#include "Framework/Singleton.h"
+#include "Framework/Factory.h"
+
+//Core
+#include "Core/Utilities.h"
+#include "Core/FileSystem.h"
+#include "Core/Timer.h"
+
+//Audio
+#include "Audio/AudioSystem.h"
 
 //Graphics
 #include "Graphics/Renderer.h"
@@ -32,8 +37,6 @@
 #include "Component/SpriteAnimationComponent.h"
 #include "Component/PhysicsComponent.h"
 
-//Framework
-#include "Framework/EventSystem.h"
 
 // Resource
 #include "Resource/ResourceSystem.h"
@@ -47,6 +50,8 @@
 
 namespace glds
 {
+	using ObjectFactory = Singleton<Factory<std::string, Object>>;
+
 	class Engine
 	{
 	public:

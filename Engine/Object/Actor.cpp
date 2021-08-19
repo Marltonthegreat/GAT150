@@ -27,15 +27,21 @@ namespace glds
 		std::for_each(children.begin(), children.end(), [renderer](auto& child) {child->Draw(renderer); });
 	}
 	
+	float Actor::GetRadius()
+	{
+		return 0;
+	}
+
 	void Actor::AddChild(std::unique_ptr<Actor> actor)
 	{
 		actor->parent = this;
 		children.push_back(std::move(actor));
 	}
 
-	float Actor::GetRadius()
+	void Actor::AddComponent(std::unique_ptr<Component> component)
 	{
-		return 0;
+		component->owner = this;
+		components.push_back(std::move(component));
 	}
 	
 }

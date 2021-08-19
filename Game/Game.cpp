@@ -19,12 +19,17 @@ void Game::Initialize()
 	glds::SetFilePath("../Resources");
 
 	std::unique_ptr<glds::Actor> actor = std::make_unique<glds::Actor>(glds::Transform{ {400,300}, 0, 9 });
-	glds::SpriteAnimationComponent* spriteAnimationComponent = actor->AddComponent<glds::SpriteAnimationComponent>();
 
-	spriteAnimationComponent->texture = engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("character.png", engine->Get<glds::Renderer>());
-	spriteAnimationComponent->fps = 30;
-	spriteAnimationComponent->numFramesX = 12;
-	spriteAnimationComponent->numFramesY = 8;
+	auto component = glds::ObjectFactory::Instance().Create<glds::SpriteAnimationComponent>("SpriteAnimationComponent");
+
+	//glds::SpriteAnimationComponent* spriteAnimationComponent = actor->AddComponent<glds::SpriteAnimationComponent>();
+
+	component->texture = engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("character.png", engine->Get<glds::Renderer>());
+	component->fps = 30;
+	component->numFramesX = 12;
+	component->numFramesY = 8;
+
+	actor->AddComponent(std::move(component));
 
 	glds::PhysicsComponent* physicsComponent = actor->AddComponent<glds::PhysicsComponent>();
 	//physicsComponent->ApplyForce(glds::Vector2::right * 200);

@@ -11,14 +11,14 @@ namespace glds
 		void Draw(Renderer* renderer) override;
 
 	public:
-		int frame;
-		int fps;
-		int numFramesX;
-		int numFramesY;
+		int frame{};
+		int fps{};
+		int numFramesX{};
+		int numFramesY{};
 
-		float frameTimer;
-		float frameTime;
+		float frameTimer{};
+		float frameTime{};
 
-		SDL_Rect rect;
+		SDL_Rect rect{};
 	};
 }

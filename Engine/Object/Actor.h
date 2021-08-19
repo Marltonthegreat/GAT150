@@ -27,6 +27,7 @@ namespace glds
 
 		template<class T>
 		T* AddComponent();
+		void AddComponent(std::unique_ptr<Component> component);
 
 	public:
 		bool destroy{ false };
