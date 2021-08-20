@@ -20,19 +20,21 @@ void Game::Initialize()
 
 	std::unique_ptr<glds::Actor> actor = std::make_unique<glds::Actor>(glds::Transform{ {400,300}, 0, 9 });
 
-	auto component = glds::ObjectFactory::Instance().Create<glds::SpriteAnimationComponent>("SpriteAnimationComponent");
+	auto spriteAnimationComponent = glds::ObjectFactory::Instance().Create<glds::SpriteAnimationComponent>("SpriteAnimationComponent");
 
 	//glds::SpriteAnimationComponent* spriteAnimationComponent = actor->AddComponent<glds::SpriteAnimationComponent>();
 
-	component->texture = engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("character.png", engine->Get<glds::Renderer>());
-	component->fps = 30;
-	component->numFramesX = 12;
-	component->numFramesY = 8;
+	spriteAnimationComponent->texture = engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("character.png", engine->Get<glds::Renderer>());
+	spriteAnimationComponent->fps = 30;
+	spriteAnimationComponent->numFramesX = 12;
+	spriteAnimationComponent->numFramesY = 8;
 
-	actor->AddComponent(std::move(component));
+	actor->AddComponent(std::move(spriteAnimationComponent));
 
-	glds::PhysicsComponent* physicsComponent = actor->AddComponent<glds::PhysicsComponent>();
+	auto physicsComponent = glds::ObjectFactory::Instance().Create<glds::PhysicsComponent>("PhysicsComponent");
 	//physicsComponent->ApplyForce(glds::Vector2::right * 200);
+
+	actor->AddComponent(std::move(physicsComponent));
 
 	scene->AddActor(std::move(actor));
 }

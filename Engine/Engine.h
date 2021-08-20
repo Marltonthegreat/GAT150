@@ -1,4 +1,7 @@
 #pragma once
+
+#define REGISTER_CLASS(CLASS) ObjectFactory::Instance().Register<CLASS>(#CLASS);
+
 //Math
 #include "Math/Vector2.h"
 #include "Math/Color.h"
