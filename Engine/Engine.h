@@ -18,6 +18,7 @@
 #include "Core/Utilities.h"
 #include "Core/FileSystem.h"
 #include "Core/Timer.h"
+#include "Core/Json.h"
 
 //Audio
 #include "Audio/AudioSystem.h"
