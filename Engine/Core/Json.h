@@ -2,6 +2,8 @@
 #include "document.h"
 #include <string>
 
+#define JSON_READ(value, data) glds::json::Get(value, #data , data)
+
 namespace glds
 {
 	namespace json

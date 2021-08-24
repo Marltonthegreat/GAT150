@@ -6,17 +6,18 @@ int main(int, char**)
 	Game game;
 	game.Initialize();
 
-	rapidjson::Document document;
-	bool success = glds::json::Load("json.txt", document);
-	assert(success);
+	// For JSON assignment
+	//rapidjson::Document document;
+	//bool success = glds::json::Load("json.txt", document);
+	//assert(success);
 
-	int i1;
-	glds::json::Get(document, "integer1", i1);
-	std::cout << i1 << std::endl;
+	//int integer1;
+	//JSON_READ(document, integer1);
+	//std::cout << integer1 << std::endl;
 
-	int i2;
-	glds::json::Get(document, "integer2", i2);
-	std::cout << i2 << std::endl;
+	//int i2;
+	//glds::json::Get(document, "integer2", i2);
+	//std::cout << i2 << std::endl;
 
 	bool quit = false;
 	SDL_Event event;

@@ -1,4 +1,5 @@
 #include "Actor.h"
+#include "Engine.h"
 #include "Math/MathUtils.h"
 #include "Graphics/Renderer.h"
 #include "Component/GraphicsComponent.h"
@@ -42,6 +43,40 @@ namespace glds
 	{
 		component->owner = this;
 		components.push_back(std::move(component));
+	}
+
+	bool Actor::Write(const rapidjson::Value& value) const
+	{
+		return false;
+	}
+
+	bool Actor::Read(const rapidjson::Value& value)
+	{
+		//JSON_READ(value, tag);
+
+		if (value.HasMember("transform"))
+		{
+			transform.Read(value["transform"]);
+		}
+
+		if (value.HasMember("components") && value["components"].IsArray())
+		{
+			for (auto& componentValue : value["components"].GetArray())
+			{
+				std::string type;
+				//JSON_READ(componentValue, type);
+				auto component = ObjectFactory::Instance().Create<Component>(type);
+
+				if (component)
+				{
+					component->owner = this;
+					component->Read(componentValue);
+					AddComponent(std::move(component));
+				}
+			}
+		}
+
+		return true;
 	}
 	
 }
