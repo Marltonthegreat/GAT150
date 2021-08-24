@@ -81,7 +81,7 @@ namespace glds
 			for (auto& actorValue : value["actors"].GetArray())
 			{
 				std::string type;
-				//JSON_READ(actorValue, type);
+				JSON_READ(actorValue, type);
 				auto actor = ObjectFactory::Instance().Create<Actor>(type);
 
 				if (actor)

@@ -32,4 +32,53 @@ namespace glds::json
 
 		return true;
 	}
+	
+	bool Get(const rapidjson::Value& value, const std::string& name, float& data)
+	{
+		// check if 'name' member exists and is of type
+		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsNumber() == false)
+		{
+			return false;
+		}
+
+		// set data
+		data = value[name.c_str()].GetFloat();
+
+		return true;
+	}
+
+	bool Get(const rapidjson::Value& value, const std::string& name, Vector2& data)
+	{
+		// check if 'name' member exists and is of type
+		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 2)
+		{
+			return false;
+		}
+
+		// set data
+		auto& array = value[name.c_str()];
+		for (rapidjson::SizeType i = 0; i < array.Size(); i++)
+		{
+			if (array[i].IsNumber())
+			{
+				data[i] = array[i].GetFloat();
+			}
+		}
+
+		return true;
+	}
+	
+	bool Get(const rapidjson::Value& value, const std::string& name, std::string& data)
+	{
+		// check if 'name' member exists and is of type
+		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsString() == false)
+		{
+			return false;
+		}
+
+		// set data
+		data = value[name.c_str()].GetString();
+
+		return true;
+	}
 }

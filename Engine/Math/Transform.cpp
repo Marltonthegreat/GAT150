@@ -41,9 +41,9 @@ namespace glds
 
 	bool Transform::Read(const rapidjson::Value& value)
 	{
-		//JSON_READ(value, position);
-		//JSON_READ(value, rotation);
-		//JSON_READ(value, scale);
+		JSON_READ(value, position);
+		JSON_READ(value, rotation);
+		JSON_READ(value, scale);
 
 		return true;
 	}

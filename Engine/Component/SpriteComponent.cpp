@@ -23,7 +23,7 @@ namespace glds
 	bool SpriteComponent::Read(const rapidjson::Value& value)
 	{
 		std::string textureName;
-		//JSON_READ(value, textureName);
+		JSON_READ(value, textureName);
 
 		texture = owner->scene->engine->Get<ResourceSystem>()->Get<Texture>(textureName, owner->scene->engine->Get<Renderer>());
 

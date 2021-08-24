@@ -52,7 +52,7 @@ namespace glds
 
 	bool Actor::Read(const rapidjson::Value& value)
 	{
-		//JSON_READ(value, tag);
+		JSON_READ(value, tag);
 
 		if (value.HasMember("transform"))
 		{
@@ -64,7 +64,7 @@ namespace glds
 			for (auto& componentValue : value["components"].GetArray())
 			{
 				std::string type;
-				//JSON_READ(componentValue, type);
+				JSON_READ(componentValue, type);
 				auto component = ObjectFactory::Instance().Create<Component>(type);
 
 				if (component)
