@@ -107,9 +107,6 @@
     <ClCompile Include="Core\Json.cpp">
       <Filter>Source\Core</Filter>
     </ClCompile>
-    <ClCompile Include="Component\Component.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\EventSystem.h">

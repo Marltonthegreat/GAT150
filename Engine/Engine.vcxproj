@@ -173,7 +173,6 @@
   <ItemGroup>
     <ClCompile Include="Audio\AudioChannel.cpp" />
     <ClCompile Include="Audio\AudioSystem.cpp" />
-    <ClCompile Include="Component\Component.cpp" />
     <ClCompile Include="Component\PhysicsComponent.cpp" />
     <ClCompile Include="Component\SpriteAnimationComponent.cpp" />
     <ClCompile Include="Component\SpriteComponent.cpp" />

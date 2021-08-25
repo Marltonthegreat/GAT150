@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "document.h"
+
 
 int main(int, char**)
 {
@@ -11,6 +11,8 @@ int main(int, char**)
 
 	while (!quit && !game.IsQuit())
 	{
+
+
 		SDL_PollEvent(&event);
 		switch (event.type)
 		{
