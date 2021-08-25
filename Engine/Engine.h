@@ -1,6 +1,6 @@
 #pragma once
 
-#define REGISTER_CLASS(class) ObjectFactory::Instance().Register<class>(#class)
+#define REGISTER_CLASS(class) glds::ObjectFactory::Instance().Register<class>(#class)
 
 //Math
 #include "Math/Vector2.h"
@@ -30,6 +30,9 @@
 #include "Graphics/Font.h"
 #include "Graphics/ParticleSystem.h"
 
+//Physics
+#include "Physics/PhysicsSystem.h"
+
 //Input
 #include "Input/InputSystem.h"
 
@@ -41,6 +44,7 @@
 #include "Component/SpriteComponent.h"
 #include "Component/SpriteAnimationComponent.h"
 #include "Component/PhysicsComponent.h"
+#include "Component/RBPhysicsComponent.h"
 
 
 // Resource

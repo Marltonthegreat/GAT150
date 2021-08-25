@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Core/Utilities.h"	
+#include "GameComponent/PlayerComponent.h"
 #include <fstream>
 #include <string>
 
@@ -9,6 +10,9 @@ void Game::Initialize()
 	engine = std::make_unique<glds::Engine>();
 	engine->Startup();
 	engine->Get<glds::Renderer>()->Create("GAT150", 800, 600);
+
+	//register classes
+	REGISTER_CLASS(PlayerComponent);
 
 	//create scene
 	scene = std::make_unique<glds::Scene>();
@@ -22,26 +26,6 @@ void Game::Initialize()
 	bool success = glds::json::Load("scene.txt", document);
 	assert(success);
 	scene->Read(document);
-
-	//std::unique_ptr<glds::Actor> actor = std::make_unique<glds::Actor>(glds::Transform{ {400,300}, 0, 9 });
-
-	//auto spriteAnimationComponent = glds::ObjectFactory::Instance().Create<glds::SpriteAnimationComponent>("SpriteAnimationComponent");
-
-	////glds::SpriteAnimationComponent* spriteAnimationComponent = actor->AddComponent<glds::SpriteAnimationComponent>();
-
-	//spriteAnimationComponent->texture = engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("character.png", engine->Get<glds::Renderer>());
-	//spriteAnimationComponent->fps = 30;
-	//spriteAnimationComponent->numFramesX = 12;
-	//spriteAnimationComponent->numFramesY = 8;
-
-	//actor->AddComponent(std::move(spriteAnimationComponent));
-
-	//auto physicsComponent = glds::ObjectFactory::Instance().Create<glds::PhysicsComponent>("PhysicsComponent");
-	////physicsComponent->ApplyForce(glds::Vector2::right * 200);
-
-	//actor->AddComponent(std::move(physicsComponent));
-
-	//scene->AddActor(std::move(actor));
 }
 
 void Game::Shutdown()
