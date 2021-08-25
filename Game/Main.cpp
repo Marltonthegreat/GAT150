@@ -1,9 +1,9 @@
 #include "Game.h"
+#include "document.h"
 
 int main(int, char**)
 {
 	Game game;
-
 	game.Initialize();
 
 	bool quit = false;

@@ -18,25 +18,30 @@ void Game::Initialize()
 	glds::SeedRandom(static_cast<unsigned int>(time(nullptr)));
 	glds::SetFilePath("../Resources");
 
-	std::unique_ptr<glds::Actor> actor = std::make_unique<glds::Actor>(glds::Transform{ {400,300}, 0, 9 });
+	rapidjson::Document document;
+	bool success = glds::json::Load("scene.txt", document);
+	assert(success);
+	scene->Read(document);
 
-	auto spriteAnimationComponent = glds::ObjectFactory::Instance().Create<glds::SpriteAnimationComponent>("SpriteAnimationComponent");
+	//std::unique_ptr<glds::Actor> actor = std::make_unique<glds::Actor>(glds::Transform{ {400,300}, 0, 9 });
 
-	//glds::SpriteAnimationComponent* spriteAnimationComponent = actor->AddComponent<glds::SpriteAnimationComponent>();
+	//auto spriteAnimationComponent = glds::ObjectFactory::Instance().Create<glds::SpriteAnimationComponent>("SpriteAnimationComponent");
 
-	spriteAnimationComponent->texture = engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("character.png", engine->Get<glds::Renderer>());
-	spriteAnimationComponent->fps = 30;
-	spriteAnimationComponent->numFramesX = 12;
-	spriteAnimationComponent->numFramesY = 8;
+	////glds::SpriteAnimationComponent* spriteAnimationComponent = actor->AddComponent<glds::SpriteAnimationComponent>();
 
-	actor->AddComponent(std::move(spriteAnimationComponent));
+	//spriteAnimationComponent->texture = engine->Get<glds::ResourceSystem>()->Get<glds::Texture>("character.png", engine->Get<glds::Renderer>());
+	//spriteAnimationComponent->fps = 30;
+	//spriteAnimationComponent->numFramesX = 12;
+	//spriteAnimationComponent->numFramesY = 8;
 
-	auto physicsComponent = glds::ObjectFactory::Instance().Create<glds::PhysicsComponent>("PhysicsComponent");
-	//physicsComponent->ApplyForce(glds::Vector2::right * 200);
+	//actor->AddComponent(std::move(spriteAnimationComponent));
 
-	actor->AddComponent(std::move(physicsComponent));
+	//auto physicsComponent = glds::ObjectFactory::Instance().Create<glds::PhysicsComponent>("PhysicsComponent");
+	////physicsComponent->ApplyForce(glds::Vector2::right * 200);
 
-	scene->AddActor(std::move(actor));
+	//actor->AddComponent(std::move(physicsComponent));
+
+	//scene->AddActor(std::move(actor));
 }
 
 void Game::Shutdown()

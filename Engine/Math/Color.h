@@ -20,6 +20,10 @@ namespace glds
 		Color operator + (const Color color) { return { r + color.r, g + color.g, b + color.b }; }
 		Color operator - (const Color color) { return { r - color.r, g - color.g, b - color.b }; }
 		Color operator * (const float s) const { return { r * s, g * s, b * s }; }
+
+		float  operator [] (size_t index) const { return (&r)[index]; }
+		float& operator [] (size_t index) { return (&r)[index]; }
+
 		operator std::uint32_t() const { return toRGB(); }
 		operator bool() const { return false; }
 
@@ -42,6 +46,12 @@ namespace glds
 		}
 
 		friend std::istream& operator >> (std::istream& stream, Color& v);
+		friend std::ostream& operator << (std::ostream& stream, Color& v)
+		{
+			stream << v.r << " " << v.g << " " << v.b;
+
+			return stream;
+		}
 
 		static const Color black;
 		static const Color white;
