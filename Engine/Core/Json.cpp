@@ -47,6 +47,34 @@ namespace glds::json
 		return true;
 	}
 
+	bool Get(const rapidjson::Value& value, const std::string& name, bool& data)
+	{
+		// check if 'name' member exists and is of type
+		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsBool() == false)
+		{
+			return false;
+		}
+
+		// set data
+		data = value[name.c_str()].GetBool();
+
+		return true;
+	}
+
+	bool Get(const rapidjson::Value& value, const std::string& name, std::string& data)
+	{
+		// check if 'name' member exists and is of type
+		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsString() == false)
+		{
+			return false;
+		}
+
+		// set data
+		data = value[name.c_str()].GetString();
+
+		return true;
+	}
+
 	bool Get(const rapidjson::Value& value, const std::string& name, Vector2& data)
 	{
 		// check if 'name' member exists and is of type
@@ -67,18 +95,26 @@ namespace glds::json
 
 		return true;
 	}
-	
-	bool Get(const rapidjson::Value& value, const std::string& name, std::string& data)
+
+	bool Get(const rapidjson::Value& value, const std::string& name, Color& data)
 	{
 		// check if 'name' member exists and is of type
-		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsString() == false)
+		if (value.HasMember(name.c_str()) == false || value[name.c_str()].IsArray() == false || value[name.c_str()].Size() != 3)
 		{
 			return false;
 		}
 
 		// set data
-		data = value[name.c_str()].GetString();
+		auto& array = value[name.c_str()];
+		for (rapidjson::SizeType i = 0; i < array.Size(); i++)
+		{
+			if (array[i].IsNumber())
+			{
+				data[i] = array[i].GetFloat();
+			}
+		}
 
 		return true;
 	}
+	
 }
