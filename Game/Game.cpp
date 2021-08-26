@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Core/Utilities.h"	
 #include "GameComponent/PlayerComponent.h"
+#include "GameComponent/EnemyComponent.h"
 #include <fstream>
 #include <string>
 
@@ -13,6 +14,7 @@ void Game::Initialize()
 
 	//register classes
 	REGISTER_CLASS(PlayerComponent);
+	REGISTER_CLASS(EnemyComponent);
 
 	//create scene
 	scene = std::make_unique<glds::Scene>();

@@ -52,6 +52,7 @@ namespace glds
 
 	bool Actor::Read(const rapidjson::Value& value)
 	{
+		JSON_READ(value, name);
 		JSON_READ(value, tag);
 
 		if (value.HasMember("transform"))

@@ -27,6 +27,7 @@
 		},
 		{
 			"type":"Actor",
+			"name":"Player",
 			"tag":"Player",
 			"transform":{
 				"position":[
@@ -34,30 +35,78 @@
 					300
 				],
 				"scale":[
-					1,
-					1
+					2,
+					2
 				]
 			},
 			"components":[
 				{
 					"type":"PlayerComponent",
-					"speed":50
+					"speed":5
 				},
 				{
 					"type":"SpriteAnimationComponent",
-					"textureName":"character.png",
-					"fps":30,
-					"numFramesX":12,
-					"numFramesY":8
+					"textureName":"characters.png",
+					"fps":10,
+					"numFramesX":18,
+					"numFramesY":11,
+					"startFrame":90,
+					"endFrame":95
 				},
 				{
 					"type":"RBPhysicsComponent",
 					"data.isDynamic":true,
 					"data.density":1,
 					"data.lockAngle":true,
+					"data.restitution":0.1,
+					"data.gravityScale":1,
+					"data.friction":0.25,
 					"data.size":[
-						24,
-						32
+						16,
+						16
+					]
+				}
+			]
+		},
+		{
+			"type":"Actor",
+			"tag":"Enemy",
+			"transform":{
+				"position":[
+					400,
+					300
+				],
+				"scale":[
+					2,
+					2
+				]
+			},
+			"components":[
+				{
+					"type":"EnemyComponent",
+					"speed":5
+				},
+				{
+					"type":"SpriteAnimationComponent",
+					"textureName":"bat.png",
+					"fps":6,
+					"numFramesX":4,
+					"numFramesY":1,
+					"startFrame":1,
+					"endFrame":3
+				},
+				{
+					"type":"RBPhysicsComponent",
+					"data.isDynamic":true,
+					"data.density":1,
+					"data.lockAngle":true,
+					"data.restitution":0.1,
+					"data.gravityScale":0,
+					"data.friction":0.25,
+					"data.isSensor":true,
+					"data.size":[
+						16,
+						16
 					]
 				}
 			]

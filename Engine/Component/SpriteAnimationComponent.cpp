@@ -13,7 +13,7 @@ namespace glds
 			frameTimer = 0;
 			frame++;
 
-			if (frame >= numFramesX * numFramesY) frame = 0;
+			if (frame > endFrame) frame = startFrame;
 		}
 
 		Vector2 size = texture->GetSize();
@@ -44,6 +44,11 @@ namespace glds
 		JSON_READ(value, fps);
 		JSON_READ(value, numFramesX);
 		JSON_READ(value, numFramesY);
+		JSON_READ(value, startFrame);
+		JSON_READ(value, endFrame);
+
+		if (startFrame == 0 && endFrame == 0) endFrame = numFramesX * numFramesY;
+		frame = startFrame;
 
 		return true;
 	}

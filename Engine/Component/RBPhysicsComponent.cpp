@@ -8,6 +8,8 @@ namespace glds
 		if (!body)
 		{
 			body = owner->scene->engine->Get<PhysicsSystem>()->CreateBody(owner->transform.position, owner->transform.rotation, data, owner);
+			body->SetGravityScale(data.gravityScale);
+			body->SetLinearDamping(1);
 		}
 		
 		owner->transform.position = PhysicsSystem::WorldToScreen(body->GetPosition());
@@ -35,7 +37,7 @@ namespace glds
 		JSON_READ(value, data.isSensor);
 		JSON_READ(value, data.lockAngle);
 		JSON_READ(value, data.size);
-		data.size * owner->transform.scale;
+		data.size *= owner->transform.scale;
 		JSON_READ(value, data.density);
 		JSON_READ(value, data.friction);
 		JSON_READ(value, data.restitution);

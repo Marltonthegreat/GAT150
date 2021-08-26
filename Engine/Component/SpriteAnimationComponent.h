@@ -14,13 +14,16 @@ namespace glds
 		virtual bool Read(const rapidjson::Value& value) override;
 
 	public:
-		int frame{};
-		int fps{};
-		int numFramesX{};
-		int numFramesY{};
+		int frame{ 0 };
+		int fps{ 0 };
+		int numFramesX{ 0 };
+		int numFramesY{ 0 };
 
-		float frameTimer{};
-		float frameTime{};
+		int startFrame{ 0 };
+		int endFrame{ 0 };
+
+		float frameTimer{ 0 };
+		float frameTime{ 0 };
 
 		SDL_Rect rect{};
 	};
