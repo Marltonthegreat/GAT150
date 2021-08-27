@@ -27,10 +27,27 @@ namespace glds
 
 		std::for_each(children.begin(), children.end(), [renderer](auto& child) {child->Draw(renderer); });
 	}
-	
-	float Actor::GetRadius()
+
+	void Actor::BeginContact(Actor* other)
 	{
-		return 0;
+		Event event;
+
+		event.name = "collision_enter";
+		event.data = other;
+		event.receiver = this;
+
+		scene->engine->Get<EventSystem>()->Notify(event);
+	}
+
+	void Actor::EndContact(Actor* other)
+	{
+		Event event;
+
+		event.name = "collision_exit";
+		event.data = other;
+		event.receiver = this;
+
+		scene->engine->Get<EventSystem>()->Notify(event);
 	}
 
 	void Actor::AddChild(std::unique_ptr<Actor> actor)
@@ -72,12 +89,12 @@ namespace glds
 				{
 					component->owner = this;
 					component->Read(componentValue);
+					component->Create();
 					AddComponent(std::move(component));
 				}
 			}
 		}
 
 		return true;
-	}
-	
+	}	
 }

@@ -6,5 +6,7 @@ namespace glds
 	{
 	public:
 		virtual ~Object() {}
+
+		virtual void Create() {}
 	};
 }
