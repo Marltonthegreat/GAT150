@@ -159,6 +159,43 @@
 					]
 				}
 			]
+		},
+		{
+			"type":"Actor",
+			"tag":"Coin",
+			"transform":{
+				"position":[
+					200,
+					500
+				],
+				"scale":[
+					1,
+					1
+				]
+			},
+			"components":[
+				{
+					"type":"PickUpComponent",
+					"soundName":"coin"
+				},
+				{
+					"type":"SpriteAnimationComponent",
+					"textureName":"coin.png",
+					"fps":8,
+					"numFramesX":8,
+					"numFramesY":1
+				},
+				{
+					"type":"RBPhysicsComponent",
+					"data.isDynamic":false,
+					"data.lockAngle":true,
+					"data.isSensor":true,
+					"data.size":[
+						16,
+						16
+					]
+				}
+			]
 		}
 	]
 }

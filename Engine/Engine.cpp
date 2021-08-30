@@ -22,6 +22,7 @@ namespace glds
 		REGISTER_CLASS(RBPhysicsComponent);
 		REGISTER_CLASS(AudioComponent);
 		REGISTER_CLASS(TextComponent);
+		REGISTER_CLASS(PickUpComponent);
 	}
 
 	void Engine::Shutdown()
