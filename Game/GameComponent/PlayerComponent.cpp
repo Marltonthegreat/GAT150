@@ -33,7 +33,7 @@ void PlayerComponent::Update()
 		}
 		if (IsButtonPressed(SDL_SCANCODE_SPACE, owner->scene->engine))
 		{
-			force.y -= 200;
+			force.y -= 400;
 		}
 	}
 

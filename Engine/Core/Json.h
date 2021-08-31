@@ -3,6 +3,7 @@
 #include "Math/Vector2.h"
 #include "Math/Color.h"
 #include <string>
+#include <vector>
 
 #define JSON_READ(value, data) glds::json::Get(value, #data , data)
 
@@ -17,5 +18,9 @@ namespace glds
 		bool Get(const rapidjson::Value& value, const std::string& name, std::string& data);
 		bool Get(const rapidjson::Value& value, const std::string& name, Vector2& data);
 		bool Get(const rapidjson::Value& value, const std::string& name, Color& data);
+		bool Get(const rapidjson::Value& value, const std::string& name, SDL_Rect& data);
+
+		bool Get(const rapidjson::Value& value, const std::string& name, std::vector<std::string>& data);
+		bool Get(const rapidjson::Value& value, const std::string& name, std::vector<int>& data);
 	}
 }

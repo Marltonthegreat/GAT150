@@ -31,7 +31,14 @@ void Game::Initialize()
 	assert(success);
 	scene->Read(document);
 
-	for (int i = 0; i < 1000; i++)
+	glds::Tilemap tilemap;
+	tilemap.scene = scene.get();
+	success = glds::json::Load("map.txt", document);
+	assert(success);
+	tilemap.Read(document);
+	tilemap.Create();
+
+	for (int i = 0; i < 1; i++)
 	{
 		auto actor = glds::ObjectFactory::Instance().Create<glds::Actor>("coin");
 		actor->transform.position = glds::Vector2{ glds::RandomRange(0,800), 500.0f };

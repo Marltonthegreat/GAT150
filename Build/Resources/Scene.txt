@@ -65,7 +65,7 @@
 			"components":[
 				{
 					"type":"PlayerComponent",
-					"speed":5
+					"speed":10
 				},
 				{
 					"type":"AudioComponent",
@@ -111,8 +111,8 @@
 					"data.gravityScale":1,
 					"data.friction":0.25,
 					"data.size":[
-						16,
-						16
+						24,
+						32
 					]
 				}
 			]
@@ -198,6 +198,72 @@
 					"data.size":[
 						16,
 						16
+					]
+				}
+			]
+		},
+		{
+			"type":"Actor",
+			"name":"tile01",
+			"tag":"Ground",
+			"prototype":true,
+			"transform":{
+				"scale":[
+					2,
+					2
+				]
+			},
+			"components":[
+				{
+					"type":"SpriteComponent",
+					"textureName":"tileset2_32x32.png",
+					"rect":[
+						416,
+						128,
+						32,
+						32
+					]
+				},
+				{
+					"type":"RBPhysicsComponent",
+					"data.isDynamic":false,
+					"data.density":1,
+					"data.size":[
+						32,
+						32
+					]
+				}
+			]
+		},
+		{
+			"type":"Actor",
+			"name":"tile02",
+			"tag":"Ground",
+			"prototype":true,
+			"transform":{
+				"scale":[
+					2,
+					2
+				]
+			},
+			"components":[
+				{
+					"type":"SpriteComponent",
+					"textureName":"tileset2_32x32.png",
+					"rect":[
+						320,
+						384,
+						32,
+						32
+					]
+				},
+				{
+					"type":"RBPhysicsComponent",
+					"data.isDynamic":false,
+					"data.density":1,
+					"data.size":[
+						32,
+						32
 					]
 				}
 			]
