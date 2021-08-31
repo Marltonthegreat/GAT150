@@ -125,9 +125,6 @@
     <ClCompile Include="Physics\ContactListener.cpp">
       <Filter>Source\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Component\PickUpComponent.cpp">
-      <Filter>Source\Component</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Framework\EventSystem.h">
@@ -246,9 +243,6 @@
     </ClInclude>
     <ClInclude Include="Physics\ContactListener.h">
       <Filter>Source\Physics</Filter>
-    </ClInclude>
-    <ClInclude Include="Component\PickUpComponent.h">
-      <Filter>Source\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

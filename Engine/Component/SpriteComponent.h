@@ -8,6 +8,8 @@ namespace glds
 	class SpriteComponent : public GraphicsComponent
 	{
 	public:
+		std::unique_ptr<Object> Clone() const override { return std::make_unique<SpriteComponent>(*this); }
+
 		void Update() override;
 		void Draw(Renderer* renderer) override;
 

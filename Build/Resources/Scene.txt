@@ -162,7 +162,9 @@
 		},
 		{
 			"type":"Actor",
-			"tag":"Coin",
+			"prototype":true,
+			"name":"coin",
+			"tag":"coin",
 			"transform":{
 				"position":[
 					200,
@@ -175,8 +177,11 @@
 			},
 			"components":[
 				{
-					"type":"PickUpComponent",
-					"soundName":"coin"
+					"type":"PickUpComponent"
+				},
+				{
+					"type":"AudioComponent",
+					"soundName":"audio/coin.wav"
 				},
 				{
 					"type":"SpriteAnimationComponent",

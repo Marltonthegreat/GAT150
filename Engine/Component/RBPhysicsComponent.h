@@ -7,6 +7,10 @@ namespace glds
 	class RBPhysicsComponent : public PhysicsComponent
 	{
 	public:
+		virtual ~RBPhysicsComponent();
+
+		std::unique_ptr<Object> Clone() const override { return std::make_unique<RBPhysicsComponent>(*this); }
+
 		void Update() override;
 		void ApplyForce(const Vector2& force) override;
 

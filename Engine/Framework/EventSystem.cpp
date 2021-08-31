@@ -1,39 +1,58 @@
 #include "EventSystem.h"
 #include "Object/Object.h"
 
-void glds::EventSystem::Startup()
+namespace glds
 {
+    void EventSystem::Startup()
+    {
 
-}
+    }
 
-void glds::EventSystem::Shutdown()
-{
+    void EventSystem::Shutdown()
+    {
 
-}
+    }
 
-void glds::EventSystem::Update(float dt)
-{
+    void EventSystem::Update(float dt)
+    {
 
-}
+    }
 
-void glds::EventSystem::Subscribe(const std::string& name, function_t function, Object* receiver)
-{
-	Observer observer;
-	observer.function = function;
-	observer.receiver = receiver;
+    void EventSystem::Subscribe(const std::string& name, function_t function, Object* receiver)
+    {
+	    Observer observer;
+	    observer.function = function;
+	    observer.receiver = receiver;
 
-	observers[name].push_back(observer);
-}
+	    observers[name].push_back(observer);
+    }
 
-void glds::EventSystem::Notify(const Event& event)
-{
-	auto& eventObservers = observers[event.name];
+    void EventSystem::Unsubscribe(const std::string& name, Object* receiver)
+    {
+        auto& eventObservers = observers[name];
+        for (auto iter = eventObservers.begin(); iter != eventObservers.end();)
+        {
+            if (iter->receiver == receiver)
+            {
+                iter = eventObservers.erase(iter);
+            }
+            else
+            {
+                iter++;
+            }
+        }
+    }
 
-	for (auto& observer : eventObservers)
-	{
-		if (event.receiver == nullptr || event.receiver == observer.receiver)
-		{
-			observer.function(event);
-		}
-	}
+    void EventSystem::Notify(const Event& event)
+    {
+	    auto& eventObservers = observers[event.name];
+
+	    for (auto& observer : eventObservers)
+	    {
+		    if (event.receiver == nullptr || event.receiver == observer.receiver)
+		    {
+			    observer.function(event);
+		    }
+	    }
+    }
 }

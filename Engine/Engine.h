@@ -47,7 +47,6 @@
 #include "Component/RBPhysicsComponent.h"
 #include "Component/AudioComponent.h"
 #include "Component/TextComponent.h"
-#include "Component/PickUpComponent.h"
 
 // Resource
 #include "Resource/ResourceSystem.h"

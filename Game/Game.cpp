@@ -2,6 +2,7 @@
 #include "Core/Utilities.h"	
 #include "GameComponent/PlayerComponent.h"
 #include "GameComponent/EnemyComponent.h"
+#include "GameComponent/PickUpComponent.h"
 #include <fstream>
 #include <string>
 
@@ -15,6 +16,7 @@ void Game::Initialize()
 	//register classes
 	REGISTER_CLASS(PlayerComponent);
 	REGISTER_CLASS(EnemyComponent);
+	REGISTER_CLASS(PickUpComponent);
 
 	//create scene
 	scene = std::make_unique<glds::Scene>();
@@ -28,6 +30,13 @@ void Game::Initialize()
 	bool success = glds::json::Load("scene.txt", document);
 	assert(success);
 	scene->Read(document);
+
+	for (int i = 0; i < 1000; i++)
+	{
+		auto actor = glds::ObjectFactory::Instance().Create<glds::Actor>("coin");
+		actor->transform.position = glds::Vector2{ glds::RandomRange(0,800), 500.0f };
+		scene->AddActor(std::move(actor));
+	}
 }
 
 void Game::Shutdown()

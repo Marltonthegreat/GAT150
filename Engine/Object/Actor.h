@@ -17,6 +17,9 @@ namespace glds
 	public:
 		Actor() {}
 		Actor(const Transform& transform) : transform{ transform } {}
+		Actor(const Actor& other);
+
+		std::unique_ptr<Object> Clone() const override { return std::make_unique<Actor>(*this); }
 
 		virtual void Initialize() {}
 
