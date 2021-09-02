@@ -3,6 +3,11 @@
 
 namespace glds
 {
+	RBPhysicsComponent::RBPhysicsComponent(const RBPhysicsComponent* other)
+	{
+		data = other->data;
+	}
+
 	RBPhysicsComponent::~RBPhysicsComponent()
 	{
 		if(body) owner->scene->engine->Get<PhysicsSystem>()->DestroyBody(body);

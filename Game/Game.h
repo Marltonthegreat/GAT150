@@ -8,12 +8,13 @@ class Game
 public:
 	enum class GameState
 	{
+		Reset,
 		Title,
 		StartGame,
 		StartLevel,
-		Game,
-		GameOver,
-
+		Level,
+		PlayerDead,
+		GameOver
 	};
 
 public:
@@ -37,27 +38,27 @@ private:
 	void OnAddPoints(const glds::Event& event);
 	void OnPlayerDeath(const glds::Event& event);
 
+	void Reset();
+	void Title();
+	void StartGame();
+	void StartLevel();
+	void Level();
+	void PlayerDead();
+	void GameOver();
+
 public:
 	std::unique_ptr<glds::Engine> engine;
 	std::unique_ptr<glds::Scene> scene;
 
 private:
+
 	bool quit{ false };
 
-	GameState state{ GameState::Title };
+	GameState state{ GameState::Reset };
 	float stateTimer{ 0 };
+	float spawnTimer{ 0 };
 
 	size_t score{ 0 };
 	size_t highScore{ 0 };
 	size_t lives{ 0 };
-
-	glds::AudioChannel musicChannel;
-	std::shared_ptr<glds::Texture> particleTexture;
-	std::shared_ptr<glds::Texture> titleTexture;
-	std::shared_ptr<glds::Texture> startTexture;
-	std::shared_ptr<glds::Texture> gameOverTexture;
-	std::shared_ptr<glds::Texture> scoreTexture;
-	std::shared_ptr<glds::Texture> highScoreTexture;
-	std::shared_ptr<glds::Texture> livesTexture;
-	std::shared_ptr<glds::Font> font;
 };

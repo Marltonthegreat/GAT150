@@ -7,7 +7,9 @@ namespace glds
 	class RBPhysicsComponent : public PhysicsComponent
 	{
 	public:
-		virtual ~RBPhysicsComponent();
+		RBPhysicsComponent() = default;
+		RBPhysicsComponent(const RBPhysicsComponent* other);
+		~RBPhysicsComponent();
 
 		std::unique_ptr<Object> Clone() const override { return std::make_unique<RBPhysicsComponent>(*this); }
 

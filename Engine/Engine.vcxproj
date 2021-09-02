@@ -244,7 +244,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Build\Resources\map.txt" />
-    <Text Include="..\Build\Resources\Scene.txt" />
+    <Text Include="..\Build\Resources\Level.txt" />
+    <Text Include="..\Build\Resources\Title.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

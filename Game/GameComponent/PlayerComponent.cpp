@@ -33,7 +33,7 @@ void PlayerComponent::Update()
 		}
 		if (IsButtonPressed(SDL_SCANCODE_SPACE, owner->scene->engine))
 		{
-			force.y -= 400;
+			force.y -= jump;
 		}
 	}
 
@@ -85,6 +85,7 @@ bool PlayerComponent::Write(const rapidjson::Value& value) const
 bool PlayerComponent::Read(const rapidjson::Value& value)
 {
 	JSON_READ(value, speed);
+	JSON_READ(value, jump);
 
 	return true;
 }

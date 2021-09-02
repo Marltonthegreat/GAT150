@@ -27,6 +27,12 @@ void PickUpComponent::OnCollisionEnter(const glds::Event& event)
 	{
 		owner->GetComponent<AudioComponent>()->Play();
 		owner->destroy = true;
+
+		Event event;
+		event.name = "add_points";
+		event.data = 1;
+
+		owner->scene->engine->Get<EventSystem>()->Notify(event);
 	}
 }
 
