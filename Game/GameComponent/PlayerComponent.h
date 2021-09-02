@@ -24,6 +24,7 @@ public:
 	float speed{ 0 };
 	float jump{ 0 };
 
+	int test{ 0 };
 private:
 	std::list<glds::Actor*> contacts;
 };

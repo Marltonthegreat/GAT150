@@ -21,21 +21,26 @@ void PlayerComponent::Update()
 {
 	Vector2 force = 0;
 
-	if (contacts.size() > 0)
+	if (IsButtonPressHold(SDL_SCANCODE_D, owner->scene->engine))
 	{
-		if (IsButtonPressHold(SDL_SCANCODE_D, owner->scene->engine))
-		{
-			force.x += speed;
-		}
-		if (IsButtonPressHold(SDL_SCANCODE_A, owner->scene->engine))
-		{
-			force.x -= speed;
-		}
-		if (IsButtonPressed(SDL_SCANCODE_SPACE, owner->scene->engine))
-		{
-			force.y -= jump;
-		}
+		force.x += speed;
 	}
+	if (IsButtonPressHold(SDL_SCANCODE_A, owner->scene->engine))
+	{
+		force.x -= speed;
+	}
+	if (IsButtonPressed(SDL_SCANCODE_SPACE, owner->scene->engine) && contacts.size() > 0)
+	{
+		force.y -= jump;
+	}
+	if (IsButtonPressed(SDL_SCANCODE_RETURN, owner->scene->engine))
+	{
+		owner->GetComponent<glds::SpriteComponent>()->rect.x = 210 * (test % 2);
+		owner->GetComponent<glds::SpriteComponent>()->rect.y = 200 * (test / 2);
+		test++;
+		if (test == 4) test = 0;
+	}
+
 
 	PhysicsComponent* physicsComponent = owner->GetComponent<PhysicsComponent>();
 	assert(physicsComponent);

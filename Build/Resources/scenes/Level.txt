@@ -11,15 +11,15 @@
 					300
 				],
 				"scale":[
-					2,
-					2
+					0.25,
+					0.25
 				]
 			},
 			"components":[
 				{
 					"type":"PlayerComponent",
-					"speed":15,
-					"jump":400
+					"speed":10,
+					"jump":100
 				},
 				{
 					"type":"AudioComponent",
@@ -28,7 +28,13 @@
 				},
 				{
 					"type":"SpriteComponent",
-					"textureName":"Tanks\tank_model_2\tank_model_2_4_b.png"
+					"textureName":"Tanks/tankSpriteSheet.png",
+					"rect":[
+						0,
+						0,
+						210,
+						200
+					]
 				},
 				{
 					"type":"RBPhysicsComponent",
@@ -39,8 +45,8 @@
 					"data.gravityScale":1,
 					"data.friction":0.25,
 					"data.size":[
-						24,
-						32
+						210,
+						200
 					]
 				}
 			]

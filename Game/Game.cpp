@@ -109,7 +109,7 @@ void Game::Reset()
 	scene->RemoveAllActors();
 
 	rapidjson::Document document;
-	bool success = glds::json::Load("Title.txt", document);
+	bool success = glds::json::Load("scenes/Title.txt", document);
 	assert(success);
 	scene->Read(document);
 	
@@ -131,13 +131,13 @@ void Game::Title()
 void Game::StartGame()
 {
 	rapidjson::Document document;
-	bool success = glds::json::Load("Level.txt", document);
+	bool success = glds::json::Load("scenes/Level.txt", document);
 	assert(success);
 	scene->Read(document);
 
 	glds::Tilemap tilemap;
 	tilemap.scene = scene.get();
-	success = glds::json::Load("map.txt", document);
+	success = glds::json::Load("scenes/map.txt", document);
 	assert(success);
 	tilemap.Read(document);
 	tilemap.Create();
