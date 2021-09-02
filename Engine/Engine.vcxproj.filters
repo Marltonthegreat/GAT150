@@ -252,13 +252,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Build\Resources\Level.txt">
+    <Text Include="..\Build\Resources\scenes\Level.txt">
       <Filter>Resources</Filter>
     </Text>
-    <Text Include="..\Build\Resources\map.txt">
+    <Text Include="..\Build\Resources\scenes\map.txt">
       <Filter>Resources</Filter>
     </Text>
-    <Text Include="..\Build\Resources\Title.txt">
+    <Text Include="..\Build\Resources\scenes\Title.txt">
       <Filter>Resources</Filter>
     </Text>
   </ItemGroup>

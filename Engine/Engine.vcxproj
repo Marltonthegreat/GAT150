@@ -243,9 +243,9 @@
     <ClInclude Include="Resource\ResourceSystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Build\Resources\map.txt" />
-    <Text Include="..\Build\Resources\Level.txt" />
-    <Text Include="..\Build\Resources\Title.txt" />
+    <Text Include="..\Build\Resources\scenes\Level.txt" />
+    <Text Include="..\Build\Resources\scenes\map.txt" />
+    <Text Include="..\Build\Resources\scenes\Title.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

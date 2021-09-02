@@ -41,13 +41,6 @@ void PlayerComponent::Update()
 	assert(physicsComponent);
 
 	physicsComponent->ApplyForce(force);
-
-	SpriteAnimationComponent* spriteAnimationComponent = owner->GetComponent<SpriteAnimationComponent>();
-	assert(spriteAnimationComponent);
-
-	if (physicsComponent->velocity.x > 0) spriteAnimationComponent->StartSequence("walk_right");
-	else if (physicsComponent->velocity.x < 0) spriteAnimationComponent->StartSequence("walk_left");
-	else spriteAnimationComponent->StartSequence("idle");
 }
 
 void PlayerComponent::OnCollisionEnter(const Event& event)

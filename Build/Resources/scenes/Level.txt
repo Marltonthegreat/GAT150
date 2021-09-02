@@ -27,34 +27,8 @@
 					"playOnAwake":true
 				},
 				{
-					"type":"SpriteAnimationComponent",
-					"textureName":"characters.png",
-					"fps":10,
-					"numFramesX":18,
-					"numFramesY":11,
-					"startFrame":90,
-					"endFrame":95,
-					"sequences":[
-						{
-							"name":"idle",
-							"sequence.fps":1,
-							"sequence.startFrame":0,
-							"sequence.endFrame":1
-						},
-						{
-							"name":"walk_right",
-							"sequence.fps":10,
-							"sequence.startFrame":90,
-							"sequence.endFrame":95
-						},
-						{
-							"name":"walk_left",
-							"sequence.fps":10,
-							"sequence.startFrame":162,
-							"sequence.endFrame":167
-						}
-					],
-					"defaultSequence":"idle"
+					"type":"SpriteComponent",
+					"textureName":"Tanks\tank_model_2\tank_model_2_4_b.png"
 				},
 				{
 					"type":"RBPhysicsComponent",

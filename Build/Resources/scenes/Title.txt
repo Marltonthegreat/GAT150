@@ -2,6 +2,26 @@
 	"actors":[
 		{
 			"type":"Actor",
+			"name":"background",
+			"transform":{
+				"position":[
+					400,
+					300
+				],
+				"scale":[
+					1,
+					1
+				]
+			},
+			"components":[
+				{
+					"type":"SpriteComponent",
+					"textureName":"background.png"
+				}
+			]
+		},
+		{
+			"type":"Actor",
 			"name":"score",
 			"transform":{
 				"position":[
@@ -43,22 +63,6 @@
 						1
 					],
 					"text":"Title Here"
-				}
-			]
-		},
-		{
-			"type":"Actor",
-			"name":"background",
-			"transform":{
-				"scale":[
-					1,
-					1
-				]
-			},
-			"components":[
-				{
-					"type":"SpriteComponent",
-					"textureName":"background.png"
 				}
 			]
 		}
